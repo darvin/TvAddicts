@@ -1,4 +1,5 @@
-from google.appengine.ext import webapp
+import webapp2 as webapp
+import urls
 
 
 class MainHandler(webapp.RequestHandler):
@@ -8,7 +9,7 @@ class MainHandler(webapp.RequestHandler):
 from libs import rest
 
 app = webapp.WSGIApplication([('/', MainHandler),
-             ('/rest/.*', rest.Dispatcher)],
+             ('/rest/.*', rest.Dispatcher)]+urls.routes,
                              debug=True)
 
 # configure the rest dispatcher to know what prefix to expect on request urls

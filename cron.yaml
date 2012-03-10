@@ -1,0 +1,7 @@
+cron:
+- description: daily fetching of TV Rage listings
+  url: /fetchers/tv_rage/fetch_schedule
+  schedule: every 24 hours
+
+	  
+	
