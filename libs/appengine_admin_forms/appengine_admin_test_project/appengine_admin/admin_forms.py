@@ -3,23 +3,20 @@ import pickle
 import copy
 import datetime
 
+from google.appengine.ext.db import djangoforms
 from google.appengine.api import datastore_errors
 from google.appengine.ext import db
-
-def _(st):
-    return st # fixme
-
+import django.newforms as forms
+from django.newforms.util import ValidationError
 
 from . import admin_widgets
 from . import utils
 from . import admin_settings
-import wtforms
-from wtforms.validators import ValidationError
 
 MAX_REQUEST_SIZE = admin_settings.MAX_REQUEST_SIZE
 BLOB_FIELD_META_SUFFIX = admin_settings.BLOB_FIELD_META_SUFFIX
 
-class AdminModelForm(wtforms.form.Form):
+class AdminModelForm(djangoforms.ModelForm):
     """This class extends ModelForm to be able to pass additional attributes
         to the form while processing the request.
     """
@@ -93,29 +90,26 @@ def createAdminForm(formModel, editFields, editProps):
 
     # Adjust widgets by widget type
     logging.info("Ajusting widgets for AdminForm")
-#    for fieldName, field in AdminForm._fields.items():
-#        if isinstance(field.widget, wtforms.widgets.TextArea):
-#            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
-#            field.widget.attrs.update({'rows': '15', 'cols': '40', 'class': 'adminTextarea'})
-#        if isinstance(field.widget, wtforms.widgets.TextArea):
-#            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
-#            field.widget.attrs.update({'class': 'adminTextInput'})
-
-        #fixme!
-
-#        if isinstance(field, djangoforms.ModelChoiceField):
-#            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
-#            # Use custom widget with link "Add new" near dropdown box
-#            field.widget = admin_widgets.ReferenceSelect(
-#                attrs = field.widget.attrs,
-#                urlPrefix = None,
-#                referenceKind = getattr(formModel, fieldName).reference_class.kind()
-#            )
-#            # Choices must be set after creating the widget because in our case choices
-#            # is not a list but a wrapeper around query that always fetches fresh data from datastore
-#            field.widget.choices = field.choices
-#        if getattr(field.widget, 'needs_multipart_form', False):
-#            AdminForm.enctype = 'multipart/form-data'
+    for fieldName, field in AdminForm.base_fields.items():
+        if isinstance(field.widget, forms.widgets.Textarea):
+            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
+            field.widget.attrs.update({'rows': '15', 'cols': '40', 'class': 'adminTextarea'})
+        if isinstance(field.widget, forms.widgets.TextInput):
+            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
+            field.widget.attrs.update({'class': 'adminTextInput'})
+        if isinstance(field, djangoforms.ModelChoiceField):
+            logging.info("  Adjusting field: %s; widget: %s" % (fieldName, field.widget.__class__))
+            # Use custom widget with link "Add new" near dropdown box
+            field.widget = admin_widgets.ReferenceSelect(
+                attrs = field.widget.attrs,
+                urlPrefix = None,
+                referenceKind = getattr(formModel, fieldName).reference_class.kind()
+            )
+            # Choices must be set after creating the widget because in our case choices
+            # is not a list but a wrapeper around query that always fetches fresh data from datastore
+            field.widget.choices = field.choices
+        if getattr(field.widget, 'needs_multipart_form', False):
+            AdminForm.enctype = 'multipart/form-data'
 
     # Adjust widgets by property type
     for prop in editProps:
@@ -135,7 +129,7 @@ def createAdminForm(formModel, editFields, editProps):
     return AdminForm
 
 
-class FileField(wtforms.fields.Field):
+class FileField(forms.fields.Field):
     widget = admin_widgets.FileInput
     error_messages = {
         'invalid': u"No file was submitted. Check the encoding type on the form.",
@@ -180,8 +174,8 @@ class FileField(wtforms.fields.Field):
             raise ValidationError(self.error_messages['max_size'] % (self.file_size, MAX_REQUEST_SIZE))
 
         return file_content
-wtforms.fields.FileField = FileField
-wtforms.FileField = FileField
+forms.fields.FileField = FileField
+forms.FileField = FileField
 
 ### HACK HACK HACK ###
 # djangoforms.ReferenceProperty.get_value_for_form() does not catch the error that occurs
@@ -198,12 +192,11 @@ def _wrapped_get_value_for_form(self, instance):
         logging.warning('Error catched while getting item values: %s' % exc)
         return  None
 
-#fixme
-#_original_get_value_for_form = wtforms..ReferenceProperty.get_value_for_form
-#djangoforms.ReferenceProperty.get_value_for_form = _wrapped_get_value_for_form
+_original_get_value_for_form = djangoforms.ReferenceProperty.get_value_for_form
+djangoforms.ReferenceProperty.get_value_for_form = _wrapped_get_value_for_form
 
 
-class ModelMultipleChoiceField(wtforms.fields.SelectMultipleField):
+class ModelMultipleChoiceField(forms.MultipleChoiceField):
     default_error_messages = {
         'invalid_choice': _(u'Please select a valid choice. '
             u'That choice is not one of the available choices.'),
@@ -296,7 +289,7 @@ class ModelMultipleChoiceField(wtforms.fields.SelectMultipleField):
             new_value.append(item)
         return new_value
 
-class SplitDateTimeField(wtforms.fields.DateTimeField):
+class SplitDateTimeField(forms.fields.SplitDateTimeField):
     def compress(self, data_list):
         """Checks additionaly if all necessary data is supplied
         """
