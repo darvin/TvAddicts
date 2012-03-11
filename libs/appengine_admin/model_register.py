@@ -3,6 +3,13 @@ import copy
 
 from google.appengine.api import datastore_errors
 from google.appengine.ext import db
+try:
+    from django.newforms.util import smart_unicode
+except ImportError:
+    try:
+        from django.forms.util import smart_unicode
+    except ImportError:
+        from django.utils.encoding import smart_unicode
 
 from . import admin_forms
 from . import utils
@@ -88,13 +95,18 @@ class ModelAdmin(object):
                     # Show 'None' in place of missing items
                     new_value_list = []
                     for key in prop.value:
-                        new_value_list.append(str(db.get(key)))
+                        new_value_list.append(smart_unicode(db.get(key)))
                     prop.value = ', '.join(new_value_list)
             except datastore_errors.Error, exc:
                 # Error is raised if referenced property is deleted
                 # Catch the exception and set value to none
                 logging.warning('Error catched in ModelAdmin._attachListFields: %s' % exc)
                 prop.value = None
+            # convert the value to unicode for displaying in list view
+            if hasattr(prop.value, '__call__'):
+                # support for methods
+                prop.value = prop.value()
+            prop.value = smart_unicode(prop.value)
         return item
 
 

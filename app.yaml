@@ -18,8 +18,6 @@ handlers:
   script: admin.app.app
 
 
-- url: /.*
-  script: main.app
 
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
@@ -30,3 +28,7 @@ handlers:
 - url: /appengine_admin_media
   static_dir: libs/appengine_admin/media
   secure: never
+
+
+- url: /.*
+  script: main.app

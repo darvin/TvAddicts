@@ -1,5 +1,8 @@
 from webob.multidict import UnicodeMultiDict
-import wtforms as forms
+try:
+    from django import newforms as forms
+except ImportError:
+    from django import forms
 
 class ReferenceSelect(forms.widgets.Select):
     """Customized Select widget that adds link "Add new" near dropdown box.
@@ -52,7 +55,7 @@ class FileInput(forms.widgets.Input):
             } + output
         return output
 
-    def value_from_datadict(self, data, name):
+    def value_from_datadict(self, data, files, name):
         "File widgets take data from FILES, not POST"
         return data.get(name, None)
 
@@ -63,15 +66,16 @@ class FileInput(forms.widgets.Input):
 
 
 
-class AdminDateWidget(forms.widgets.TextInput):
+### These are taken from Django 1.0 contrib.admin.widgets
+class AdminDateWidget(forms.TextInput):
     def __init__(self, attrs={}):
         super(AdminDateWidget, self).__init__(attrs={'class': 'vDateField', 'size': '10'})
 
-class AdminTimeWidget(forms.widgets.TextInput):
+class AdminTimeWidget(forms.TextInput):
     def __init__(self, attrs={}):
         super(AdminTimeWidget, self).__init__(attrs={'class': 'vTimeField', 'size': '8'})
 
-class AdminSplitDateTime(forms.widgets.TextInput):
+class AdminSplitDateTime(forms.SplitDateTimeWidget):
     """
     A SplitDateTime Widget that has some admin-specific styling.
     """
@@ -85,7 +89,7 @@ class AdminSplitDateTime(forms.widgets.TextInput):
         return u'<p class="datetime">%s %s<br />%s %s</p>' % \
             ('Date:', rendered_widgets[0], 'Time:', rendered_widgets[1])
 
-class SelectMultiple(forms.widgets.Select):
+class SelectMultiple(forms.SelectMultiple):
     def value_from_datadict(self, data, name):
         if isinstance(data, UnicodeMultiDict):
             return data.getall(name)
