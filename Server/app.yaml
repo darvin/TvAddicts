@@ -2,33 +2,28 @@ application: tv-addicts
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: false
+threadsafe: true
 builtins:
 - remote_api: on
 libraries:
 - name: django
   version: "1.2"
 handlers:
-
-
 - url: /rest/.*
   script: rest_api.app.app
 
 - url: /admin/.*
   script: admin.app.app
 
-
-
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   login: admin
-
 
 #admin static files
 - url: /appengine_admin_media
   static_dir: libs/appengine_admin/media
   secure: never
 
-
+#stuff
 - url: /.*
   script: main.app
