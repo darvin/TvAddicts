@@ -139,6 +139,7 @@ class Article(BaseModel):
     type = ChoiceProperty(enumerate(ARTICLE_TYPE_CHOICES))
     title = db.StringProperty(required=True)
     body = db.StringProperty(required=True)
+    summary = db.StringProperty()
     publication_date = db.DateTimeProperty()
     exclusive = db.BooleanProperty(default=False)
 
