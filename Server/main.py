@@ -1,3 +1,7 @@
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'django_settings'
+
+
 import logging
 
 import webapp2 as webapp

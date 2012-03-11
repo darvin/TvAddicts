@@ -1,15 +1,8 @@
 from google.appengine.ext import db
-from google.appengine.ext.db.polymodel import PolyModel
-from referenced_property import ReferenceListProperty
+from libs.appengine_admin.db_extensions import ManyToManyProperty
 from libs.aetycoon import *
 
 
-ARTICLE_TYPE_CHOICES = (None, "Review"
-                        "Feature",
-                        "Interview",
-                        "News",
-                        "One-liner",
-                        "Article",)
 SHOW_STATUS_CHOICES = (None,
                        "Returning Series",
                        "Final Season",
@@ -31,6 +24,8 @@ SHOW_CLASSIFICATION_CHOICES = (None,
 
 
 class BaseModel(db.Model):
+    title = db.StringProperty()
+
     updated = db.DateTimeProperty(auto_now=True)
     created = db.DateTimeProperty(auto_now_add=True)
 
@@ -60,6 +55,15 @@ class BaseModel(db.Model):
         obj, created = model.get_or_create(title=title)
         setattr(self, property_name, obj)
 
+    def __unicode__(self):
+        if self.title:
+            return self.title
+        else:
+            return "{}: {}".format(self.__class__.__name__, self.key())
+
+    def __str__(self):
+        return unicode(self)
+
 
 class PopulatedModel(BaseModel):
     fully_populated = db.BooleanProperty(default=False)
@@ -78,25 +82,24 @@ class PopulatedModel(BaseModel):
 
 
 class Network(BaseModel):
-    title = db.StringProperty()
+    pass
 
 
 class Country(BaseModel):
-    title = db.StringProperty()
+    pass
 
 
 class Genre(BaseModel):
-    title = db.StringProperty()
+    pass
 
 
 class Show(PopulatedModel):
-    title = db.StringProperty()
     country = db.ReferenceProperty(Country)
-    genres = ReferenceListProperty(Genre)
+    genres = ManyToManyProperty(Genre)
     status = ChoiceProperty(enumerate(SHOW_STATUS_CHOICES))
     classification = ChoiceProperty(enumerate(SHOW_CLASSIFICATION_CHOICES))
     summary = CompressedTextProperty(default="")
-    networks = ReferenceListProperty(Network)
+    networks = ManyToManyProperty(Network)
     runtime = db.IntegerProperty()
     started_date = db.DateProperty()
     ended_date = db.DateProperty()
@@ -115,7 +118,6 @@ class Show(PopulatedModel):
 
 class Episode(PopulatedModel):
     show = db.ReferenceProperty(Show)
-    title = db.StringProperty()
     summary = CompressedTextProperty(default="")
     air_date = db.DateTimeProperty()
     season_number = db.IntegerProperty()
@@ -125,20 +127,29 @@ class Episode(PopulatedModel):
     screenshot_link = db.LinkProperty()
     rating = db.FloatProperty()
 
+    def __unicode__(self):
+        return "{show}: {episode_title}".format(show=self.show, episode_title=self.title)
+
 
 class Track(BaseModel):
     episode = db.ReferenceProperty(Episode)
-    title = db.StringProperty()
     artist = db.StringProperty()
 
+    def __unicode__(self):
+        return "{artist} - {title} ({episode})".format(
+            episode=self.episode, artist=self.artist, title=self.title)
+
+
+
+class ArticleType(BaseModel):
+    pass
 
 class Article(BaseModel):
     show = db.ReferenceProperty(Show, required=True)
-    related_shows = ReferenceListProperty(Show)
-    related_episodes = ReferenceListProperty(Episode)
-    type = ChoiceProperty(enumerate(ARTICLE_TYPE_CHOICES))
-    title = db.StringProperty(required=True)
-    body = db.StringProperty(required=True)
+    related_shows = ManyToManyProperty(Show)
+    related_episodes = ManyToManyProperty(Episode)
+    type = db.ReferenceProperty(ArticleType)
+    body = CompressedTextProperty()
     summary = db.StringProperty()
     publication_date = db.DateTimeProperty()
     exclusive = db.BooleanProperty(default=False)

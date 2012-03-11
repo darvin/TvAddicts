@@ -14,10 +14,11 @@ handlers:
 
 - url: /admin/.*
   script: admin.app.app
-
-- url: /remote_api
-  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
   login: admin
+
+#- url: /remote_api
+#  script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py
+#  login: admin
 
 #admin static files
 - url: /appengine_admin_media

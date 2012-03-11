@@ -70,7 +70,7 @@ class FetchSchedule(webapp.RequestHandler):
                 if not show.fully_populated:
                     taskqueue.add(url=webapp.uri_for(name_prefix+"show_task"),
                         params={'showid': showid})
-                if i>120:
+                if i>12:
                     break
 
 
