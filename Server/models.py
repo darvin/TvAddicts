@@ -7,7 +7,7 @@ SHOW_STATUS_CHOICES = (None,
                        "Returning Series",
                        "Final Season",
                        "TBD/On The Bubble",
-#                       "",
+                       "New Series",
 #                       "",
 #                       "",
     )
@@ -20,7 +20,8 @@ SHOW_CLASSIFICATION_CHOICES = (None,
                                "Documentary",
                                "Animation",
                                "Mini-Series",
-                               "Game Show",)
+                               "Game Show",
+                               "Sports",)
 
 
 class BaseModel(db.Model):
@@ -81,37 +82,20 @@ class PopulatedModel(BaseModel):
         self.put()
 
 
-class Network(BaseModel):
-    pass
-
-
-class Country(BaseModel):
-    pass
-
-
-class Genre(BaseModel):
-    pass
 
 
 class Show(PopulatedModel):
-    country = db.ReferenceProperty(Country)
-    genres = ManyToManyProperty(Genre)
+    country = db.StringProperty()
+    genres = db.StringListProperty(default=None)
+    networks = db.StringListProperty(default=None)
+
     status = ChoiceProperty(enumerate(SHOW_STATUS_CHOICES))
     classification = ChoiceProperty(enumerate(SHOW_CLASSIFICATION_CHOICES))
     summary = CompressedTextProperty(default="")
-    networks = ManyToManyProperty(Network)
     runtime = db.IntegerProperty()
     started_date = db.DateProperty()
     ended_date = db.DateProperty()
 
-    def set_genres(self, genres_lst):
-        self._set_referenced_list_property_create_objects("genres", Genre, genres_lst)
-
-    def set_country(self, country_title):
-        self._set_referenced_property_create_objects("country", Country, country_title)
-
-    def set_networks(self, networks_lst):
-        self._set_referenced_list_property_create_objects("networks", Network, networks_lst)
 
 
 

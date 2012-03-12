@@ -1,7 +1,7 @@
 ## Admin views ##
-from google.appengine.ext.db.djangoforms import forms
+from libs.appengine_admin.djangoforms import forms
 from libs import appengine_admin
-from models import Show, Episode, Network, Country, Genre, Article, ArticleType, Track
+from models import Show, Episode, Article, ArticleType, Track
 
 
 class BaseAdmin(appengine_admin.ModelAdmin):
@@ -14,20 +14,6 @@ class BaseAdmin(appengine_admin.ModelAdmin):
             for field_name, field in self.customFormFields.iteritems():
                 self.AdminForm.base_fields[field_name] = field
 
-class NetworkAdmin(BaseAdmin):
-    model = Network
-    listFields = ("title",)
-    editFields = ("title",)
-
-class CountryAdmin(BaseAdmin):
-    model = Country
-    listFields = ("title",)
-    editFields = ("title",)
-
-class GenreAdmin(BaseAdmin):
-    model = Genre
-    listFields = ("title",)
-    editFields = ("title",)
 
 class ArticleTypeAdmin(BaseAdmin):
     model = ArticleType
@@ -60,7 +46,11 @@ class ArticleAdmin(BaseAdmin):
 class ShowAdmin(BaseAdmin):
     model = Show
     listFields = ("title", "updated", "created")
-    editFields = ("title", "summary")
+    editFields = ("title",
+                  "summary",
+        "country",
+        "genres",
+        "networks",)
     readonlyFields = ("updated", "created")
 
     customFormFields = {
@@ -87,8 +77,5 @@ class TrackAdmin(BaseAdmin):
 appengine_admin.register(ShowAdmin,
     EpisodeAdmin,
     ArticleAdmin,
-    GenreAdmin,
-    NetworkAdmin,
-    CountryAdmin,
     ArticleTypeAdmin,
     TrackAdmin)

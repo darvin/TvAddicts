@@ -1,5 +1,6 @@
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'django_settings'
+from django_legacy_setup import setup_legacy_django_compatibility
+
+setup_legacy_django_compatibility()
 
 
 #from google.appengine.ext.webapp.util import run_wsgi_app

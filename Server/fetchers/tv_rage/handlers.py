@@ -1,17 +1,21 @@
+from StringIO import StringIO
 from datetime import datetime
-from xml.etree.ElementTree import tostring
-from google.appengine.api import taskqueue
+import urllib
+from google.appengine.api import taskqueue, urlfetch
 import logging
+from google.appengine.api.datastore_errors import BadValueError
 import webapp2 as webapp
-from models import Show, Genre, Episode, Country
+from models import Show, Episode
 from fetchers.tv_rage.urls import url_prefix, name_prefix
+try:
+    import xml.etree.cElementTree as et
+except ImportError:
+    import xml.etree.ElementTree as et
 
-__author__ = 'darvin'
 
 
 
-from libs.tvrage import feeds
-feeds.TV_RAGE_API_KEY = "Fli3h0sNYIV0yyDWETv0"
+TV_RAGE_API_KEY = "Fli3h0sNYIV0yyDWETv0"
 
 CLASSIFICATION_ONLY = ("Scripted",)
 
@@ -59,9 +63,45 @@ def get_float(node, key):
         return None
 
 
-class FetchSchedule(webapp.RequestHandler):
+
+class BaseFetcher(webapp.RedirectHandler):
+    BASE_URL = 'http://services.tvrage.com/myfeeds/{feed}.php?{params}'
+    FEED_NAME = None
+    def build_url(self, params):
+        prms = {"key": TV_RAGE_API_KEY}
+        if params:
+            prms.update(params)
+        result = self.BASE_URL.format(feed=self.FEED_NAME,
+            params=urllib.urlencode(prms))
+        return result
+
+
+    def handle_xml(self, result_xml):
+        pass
+
+    def __handle_result(self, rpc):
+        result = rpc.get_result()
+#        result = et.parse (StringIO(result.content))
+#        root = result.getroot()
+        root = et.fromstring(result.content)
+        self.handle_xml(root)
+
+    def __create_callback(self,rpc):
+        return lambda: self.__handle_result(rpc)
+
+    def make_request(self, params=None):
+        rpc = urlfetch.create_rpc(deadline=20)
+        rpc.callback = self.__create_callback(rpc)
+        urlfetch.make_fetch_call(rpc, self.build_url(params))
+        rpc.wait()
+
+class FetchSchedule(BaseFetcher):
+    FEED_NAME = "currentshows"
+
     def get(self, *args):
-        shows = feeds.current_shows()
+        self.make_request()
+
+    def handle_xml(self, shows):
         for country in shows:
             for i, show in enumerate(country):
                 showid = get_int(show, "showid")
@@ -75,33 +115,44 @@ class FetchSchedule(webapp.RequestHandler):
 
 
 
-class ShowTask(webapp.RequestHandler):
+class ShowTask(BaseFetcher):
+    FEED_NAME = "showinfo"
+
     def post(self, *args):
-        showid = int(self.request.get('showid'))
-        show = feeds.showinfo(showid)
+        self.showid = showid = int(self.request.get('showid'))
+
+        self.make_request({"sid":showid})
+
+
+    def handle_xml(self, show):
         show_title = get_str(show, "showname")
 
 
         classification = get_str(show, "classification")
 
         show_obj = Show.get_by_title(show_title)
-        show_obj.classification = classification
+        try:
+            show_obj.classification = classification
+        except BadValueError:
+            logging.critical("!!! classification {}".format(classification))
         if classification not in CLASSIFICATION_ONLY:
             show_obj.fully_populate()
             return
 
 
 
-        show_obj.set_country(get_str(show, "origin_country"))
+        show_obj.country = get_str(show, "origin_country")
 
 
-
-        show_obj.status = get_str(show, "status")
+        try:
+            show_obj.status = get_str(show, "status")
+        except BadValueError:
+            logging.critical("!!! stats {}".format(get_str(show, "status")))
 
         show_obj.summary = get_str(show, "summary") or ""
 
-        show_obj.set_networks([network.text for network in show.findall("network")])
-        show_obj.set_genres([genre.text for genre in show.find("genres")])
+        show_obj.networks = [network.text for network in show.findall("network")]
+        show_obj.genres = [genre.text for genre in show.find("genres")]
 
         seasons_number = get_int(show, "seasons")
         show_obj.runtime = get_int(show, "runtime")
@@ -110,7 +161,7 @@ class ShowTask(webapp.RequestHandler):
 
         show_obj.put()
         taskqueue.add(url=webapp.uri_for(name_prefix+"episodes_list_task"),
-            params={'showid': showid})
+            params={'showid': self.showid})
 
 
 
@@ -122,12 +173,14 @@ class EpisodeTask(webapp.RequestHandler):
     def post(self, *args):
         pass
 
-class EpisodesListTask(webapp.RequestHandler):
-
+class EpisodesListTask(BaseFetcher):
+    FEED_NAME = "episode_list"
 
     def post(self, *args):
         showid = int(self.request.get('showid'))
-        feed = feeds.episode_list(showid)
+        self.make_request({"sid":showid})
+
+    def handle_xml(self, feed):
         episode_list = feed.find("Episodelist")
         show_name = get_str(feed, "name")
 
@@ -147,7 +200,7 @@ class EpisodesListTask(webapp.RequestHandler):
             season_number = get_int(episode, "season")
             episode_number = -1
         else:
-            season_number = season.attrib["no"]
+            season_number = int(season.attrib["no"])
             episode_number = get_int(episode, "seasonnum")
         rating = get_float(episode, "rating")
         airdate = get_date(episode, "airdate")
