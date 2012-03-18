@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5794FDA41516A95B00E56E08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA31516A95B00E56E08 /* UIKit.framework */; };
+		5794FDA61516A95B00E56E08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA51516A95B00E56E08 /* Foundation.framework */; };
+		5794FDA81516A95B00E56E08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA71516A95B00E56E08 /* CoreGraphics.framework */; };
+		5794FDAA1516A95B00E56E08 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA91516A95B00E56E08 /* CoreData.framework */; };
+		5794FDB01516A95B00E56E08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5794FDAE1516A95B00E56E08 /* InfoPlist.strings */; };
+		5794FDB21516A95B00E56E08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDB11516A95B00E56E08 /* main.m */; };
+		5794FDB61516A95B00E56E08 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDB51516A95B00E56E08 /* AppDelegate.m */; };
+		5794FDB91516A95B00E56E08 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5794FDB71516A95B00E56E08 /* MainStoryboard.storyboard */; };
+		5794FDBC1516A95B00E56E08 /* TvAddicts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDBA1516A95B00E56E08 /* TvAddicts.xcdatamodeld */; };
+		5794FDBF1516A95B00E56E08 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDBE1516A95B00E56E08 /* MasterViewController.m */; };
+		5794FDC21516A95B00E56E08 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDC11516A95B00E56E08 /* DetailViewController.m */; };
+		5794FDCA1516A95B00E56E08 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDC91516A95B00E56E08 /* SenTestingKit.framework */; };
+		5794FDCB1516A95B00E56E08 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA31516A95B00E56E08 /* UIKit.framework */; };
+		5794FDCC1516A95B00E56E08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA51516A95B00E56E08 /* Foundation.framework */; };
+		5794FDCD1516A95B00E56E08 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5794FDA91516A95B00E56E08 /* CoreData.framework */; };
+		5794FDD51516A95B00E56E08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5794FDD31516A95B00E56E08 /* InfoPlist.strings */; };
+		5794FDD81516A95B00E56E08 /* TvAddictsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5794FDD71516A95B00E56E08 /* TvAddictsTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5794FDCE1516A95B00E56E08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5794FD961516A95A00E56E08 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5794FD9E1516A95B00E56E08;
+			remoteInfo = TvAddicts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5794FD9F1516A95B00E56E08 /* TvAddicts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TvAddicts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5794FDA31516A95B00E56E08 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5794FDA51516A95B00E56E08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5794FDA71516A95B00E56E08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5794FDA91516A95B00E56E08 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5794FDAD1516A95B00E56E08 /* TvAddicts-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TvAddicts-Info.plist"; sourceTree = "<group>"; };
+		5794FDAF1516A95B00E56E08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5794FDB11516A95B00E56E08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5794FDB31516A95B00E56E08 /* TvAddicts-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TvAddicts-Prefix.pch"; sourceTree = "<group>"; };
+		5794FDB41516A95B00E56E08 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5794FDB51516A95B00E56E08 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5794FDB81516A95B00E56E08 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		5794FDBB1516A95B00E56E08 /* TvAddicts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TvAddicts.xcdatamodel; sourceTree = "<group>"; };
+		5794FDBD1516A95B00E56E08 /* MasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		5794FDBE1516A95B00E56E08 /* MasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		5794FDC01516A95B00E56E08 /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		5794FDC11516A95B00E56E08 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		5794FDC81516A95B00E56E08 /* TvAddictsTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TvAddictsTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5794FDC91516A95B00E56E08 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5794FDD21516A95B00E56E08 /* TvAddictsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TvAddictsTests-Info.plist"; sourceTree = "<group>"; };
+		5794FDD41516A95B00E56E08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5794FDD61516A95B00E56E08 /* TvAddictsTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TvAddictsTests.h; sourceTree = "<group>"; };
+		5794FDD71516A95B00E56E08 /* TvAddictsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TvAddictsTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5794FD9C1516A95B00E56E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDA41516A95B00E56E08 /* UIKit.framework in Frameworks */,
+				5794FDA61516A95B00E56E08 /* Foundation.framework in Frameworks */,
+				5794FDA81516A95B00E56E08 /* CoreGraphics.framework in Frameworks */,
+				5794FDAA1516A95B00E56E08 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5794FDC41516A95B00E56E08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDCA1516A95B00E56E08 /* SenTestingKit.framework in Frameworks */,
+				5794FDCB1516A95B00E56E08 /* UIKit.framework in Frameworks */,
+				5794FDCC1516A95B00E56E08 /* Foundation.framework in Frameworks */,
+				5794FDCD1516A95B00E56E08 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5794FD941516A95A00E56E08 = {
+			isa = PBXGroup;
+			children = (
+				5794FDAB1516A95B00E56E08 /* TvAddicts */,
+				5794FDD01516A95B00E56E08 /* TvAddictsTests */,
+				5794FDA21516A95B00E56E08 /* Frameworks */,
+				5794FDA01516A95B00E56E08 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5794FDA01516A95B00E56E08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5794FD9F1516A95B00E56E08 /* TvAddicts.app */,
+				5794FDC81516A95B00E56E08 /* TvAddictsTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5794FDA21516A95B00E56E08 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5794FDA31516A95B00E56E08 /* UIKit.framework */,
+				5794FDA51516A95B00E56E08 /* Foundation.framework */,
+				5794FDA71516A95B00E56E08 /* CoreGraphics.framework */,
+				5794FDA91516A95B00E56E08 /* CoreData.framework */,
+				5794FDC91516A95B00E56E08 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5794FDAB1516A95B00E56E08 /* TvAddicts */ = {
+			isa = PBXGroup;
+			children = (
+				5794FDB41516A95B00E56E08 /* AppDelegate.h */,
+				5794FDB51516A95B00E56E08 /* AppDelegate.m */,
+				5794FDB71516A95B00E56E08 /* MainStoryboard.storyboard */,
+				5794FDBD1516A95B00E56E08 /* MasterViewController.h */,
+				5794FDBE1516A95B00E56E08 /* MasterViewController.m */,
+				5794FDC01516A95B00E56E08 /* DetailViewController.h */,
+				5794FDC11516A95B00E56E08 /* DetailViewController.m */,
+				5794FDBA1516A95B00E56E08 /* TvAddicts.xcdatamodeld */,
+				5794FDAC1516A95B00E56E08 /* Supporting Files */,
+			);
+			path = TvAddicts;
+			sourceTree = "<group>";
+		};
+		5794FDAC1516A95B00E56E08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5794FDAD1516A95B00E56E08 /* TvAddicts-Info.plist */,
+				5794FDAE1516A95B00E56E08 /* InfoPlist.strings */,
+				5794FDB11516A95B00E56E08 /* main.m */,
+				5794FDB31516A95B00E56E08 /* TvAddicts-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5794FDD01516A95B00E56E08 /* TvAddictsTests */ = {
+			isa = PBXGroup;
+			children = (
+				5794FDD61516A95B00E56E08 /* TvAddictsTests.h */,
+				5794FDD71516A95B00E56E08 /* TvAddictsTests.m */,
+				5794FDD11516A95B00E56E08 /* Supporting Files */,
+			);
+			path = TvAddictsTests;
+			sourceTree = "<group>";
+		};
+		5794FDD11516A95B00E56E08 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5794FDD21516A95B00E56E08 /* TvAddictsTests-Info.plist */,
+				5794FDD31516A95B00E56E08 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5794FD9E1516A95B00E56E08 /* TvAddicts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5794FDDB1516A95B00E56E08 /* Build configuration list for PBXNativeTarget "TvAddicts" */;
+			buildPhases = (
+				5794FD9B1516A95B00E56E08 /* Sources */,
+				5794FD9C1516A95B00E56E08 /* Frameworks */,
+				5794FD9D1516A95B00E56E08 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TvAddicts;
+			productName = TvAddicts;
+			productReference = 5794FD9F1516A95B00E56E08 /* TvAddicts.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5794FDC71516A95B00E56E08 /* TvAddictsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5794FDDE1516A95B00E56E08 /* Build configuration list for PBXNativeTarget "TvAddictsTests" */;
+			buildPhases = (
+				5794FDC31516A95B00E56E08 /* Sources */,
+				5794FDC41516A95B00E56E08 /* Frameworks */,
+				5794FDC51516A95B00E56E08 /* Resources */,
+				5794FDC61516A95B00E56E08 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5794FDCF1516A95B00E56E08 /* PBXTargetDependency */,
+			);
+			name = TvAddictsTests;
+			productName = TvAddictsTests;
+			productReference = 5794FDC81516A95B00E56E08 /* TvAddictsTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5794FD961516A95A00E56E08 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Self-Employed";
+			};
+			buildConfigurationList = 5794FD991516A95B00E56E08 /* Build configuration list for PBXProject "TvAddicts" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5794FD941516A95A00E56E08;
+			productRefGroup = 5794FDA01516A95B00E56E08 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5794FD9E1516A95B00E56E08 /* TvAddicts */,
+				5794FDC71516A95B00E56E08 /* TvAddictsTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5794FD9D1516A95B00E56E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDB01516A95B00E56E08 /* InfoPlist.strings in Resources */,
+				5794FDB91516A95B00E56E08 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5794FDC51516A95B00E56E08 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDD51516A95B00E56E08 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5794FDC61516A95B00E56E08 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5794FD9B1516A95B00E56E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDB21516A95B00E56E08 /* main.m in Sources */,
+				5794FDB61516A95B00E56E08 /* AppDelegate.m in Sources */,
+				5794FDBC1516A95B00E56E08 /* TvAddicts.xcdatamodeld in Sources */,
+				5794FDBF1516A95B00E56E08 /* MasterViewController.m in Sources */,
+				5794FDC21516A95B00E56E08 /* DetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5794FDC31516A95B00E56E08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5794FDD81516A95B00E56E08 /* TvAddictsTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5794FDCF1516A95B00E56E08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5794FD9E1516A95B00E56E08 /* TvAddicts */;
+			targetProxy = 5794FDCE1516A95B00E56E08 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5794FDAE1516A95B00E56E08 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5794FDAF1516A95B00E56E08 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5794FDB71516A95B00E56E08 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5794FDB81516A95B00E56E08 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		5794FDD31516A95B00E56E08 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5794FDD41516A95B00E56E08 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5794FDD91516A95B00E56E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		5794FDDA1516A95B00E56E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5794FDDC1516A95B00E56E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TvAddicts/TvAddicts-Prefix.pch";
+				INFOPLIST_FILE = "TvAddicts/TvAddicts-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5794FDDD1516A95B00E56E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TvAddicts/TvAddicts-Prefix.pch";
+				INFOPLIST_FILE = "TvAddicts/TvAddicts-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5794FDDF1516A95B00E56E08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TvAddicts.app/TvAddicts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TvAddicts/TvAddicts-Prefix.pch";
+				INFOPLIST_FILE = "TvAddictsTests/TvAddictsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5794FDE01516A95B00E56E08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TvAddicts.app/TvAddicts";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TvAddicts/TvAddicts-Prefix.pch";
+				INFOPLIST_FILE = "TvAddictsTests/TvAddictsTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5794FD991516A95B00E56E08 /* Build configuration list for PBXProject "TvAddicts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5794FDD91516A95B00E56E08 /* Debug */,
+				5794FDDA1516A95B00E56E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5794FDDB1516A95B00E56E08 /* Build configuration list for PBXNativeTarget "TvAddicts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5794FDDC1516A95B00E56E08 /* Debug */,
+				5794FDDD1516A95B00E56E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5794FDDE1516A95B00E56E08 /* Build configuration list for PBXNativeTarget "TvAddictsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5794FDDF1516A95B00E56E08 /* Debug */,
+				5794FDE01516A95B00E56E08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5794FDBA1516A95B00E56E08 /* TvAddicts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5794FDBB1516A95B00E56E08 /* TvAddicts.xcdatamodel */,
+			);
+			currentVersion = 5794FDBB1516A95B00E56E08 /* TvAddicts.xcdatamodel */;
+			path = TvAddicts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 5794FD961516A95A00E56E08 /* Project object */;
+}
