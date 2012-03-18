@@ -1,3 +1,6 @@
 [submodule "Server/libs/aetycoon"]
 	path = Server/libs/aetycoon
 	url = git://github.com/Arachnid/aetycoon.git
+[submodule "Server/libs/appengine_admin"]
+	path = Server/libs/appengine_admin
+	url = git@github.com:darvin/appengine-admin.git
