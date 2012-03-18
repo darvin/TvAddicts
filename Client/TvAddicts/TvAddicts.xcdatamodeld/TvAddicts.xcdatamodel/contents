@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Event">
-        <attribute name="timeStamp" optional="YES" attributeType="Date"/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1170" systemVersion="11D50" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Article">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exclusive" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="publicationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="relatedEpisodes" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Episode" inverseName="articles" inverseEntity="Episode" syncable="YES"/>
+        <relationship name="relatedShows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Show" inverseName="articlesRelated" inverseEntity="Show" syncable="YES"/>
+        <relationship name="show" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="articles" inverseEntity="Show" syncable="YES"/>
+        <relationship name="type" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="ArticleType" inverseName="articles" inverseEntity="ArticleType" syncable="YES"/>
+    </entity>
+    <entity name="ArticleType" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="type" inverseEntity="Article" syncable="YES"/>
+    </entity>
+    <entity name="Country" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Show" inverseName="country" inverseEntity="Show" syncable="YES"/>
+    </entity>
+    <entity name="Episode" syncable="YES">
+        <attribute name="airDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="episodeNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="episodeNumberTotal" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="screenshotLink" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="relatedEpisodes" inverseEntity="Article" syncable="YES"/>
+        <relationship name="show" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="episodes" inverseEntity="Show" syncable="YES"/>
+    </entity>
+    <entity name="Genre" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Show" inverseName="genres" inverseEntity="Show" syncable="YES"/>
+    </entity>
+    <entity name="Network" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="shows" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Show" inverseName="networks" inverseEntity="Show" syncable="YES"/>
+    </entity>
+    <entity name="Show" syncable="YES">
+        <attribute name="classification" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="endedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="runtime" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="startedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="show" inverseEntity="Article" syncable="YES"/>
+        <relationship name="articlesRelated" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="relatedShows" inverseEntity="Article" syncable="YES"/>
+        <relationship name="country" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="shows" inverseEntity="Country" syncable="YES"/>
+        <relationship name="episodes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Episode" inverseName="show" inverseEntity="Episode" syncable="YES"/>
+        <relationship name="genres" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Genre" inverseName="shows" inverseEntity="Genre" syncable="YES"/>
+        <relationship name="networks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Network" inverseName="shows" inverseEntity="Network" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
+        <element name="Article" positionX="657" positionY="27" width="128" height="180"/>
+        <element name="Show" positionX="349" positionY="9" width="128" height="240"/>
+        <element name="Episode" positionX="603" positionY="333" width="128" height="180"/>
+        <element name="ArticleType" positionX="826" positionY="135" width="128" height="75"/>
+        <element name="Genre" positionX="403" positionY="555" width="128" height="75"/>
+        <element name="Network" positionX="117" positionY="198" width="128" height="75"/>
+        <element name="Country" positionX="144" positionY="96" width="128" height="75"/>
     </elements>
 </model>
